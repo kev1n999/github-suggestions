@@ -20,7 +20,7 @@ ${JSON.stringify(repositories)}
 Return ONLY a valid JSON object with this structure:
 
 {
-  "feedback": "string (5 linhas elogiando de forma extrovertida e engraçada/zoeira e com girías brasileiras)",
+  "feedback": "string (5 linhas elogiando de forma extrovertida e engraçada/zoeira, com girías brasileiras e direta)",
   "projects": [
     {
       "title": "string",
