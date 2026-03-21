@@ -8,12 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!username) return;
     output.innerHTML = `
       <div class="text-center text-neutral-400 animate-pulse">
-        Loading analysis...
+        Loading ideas...
       </div>
     `;
-
     try {
-      const req = await fetch("/feedback", {
+      const req = await fetch("/project-ideas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username }),
@@ -23,36 +22,53 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error("API error");
       }
 
-      const { feedback, ideas } = response;
+      const { feedback, projects } = response;
 
       output.innerHTML = `
-        <div class="flex flex-col gap-6">
-
-          <!-- Feedback -->
-          <div class="bg-neutral-800 rounded-xl p-5 border border-neutral-700">
-            <h2 class="text-white text-xl font-semibold mb-3">
-              Feedback
-            </h2>
-            <div id="feedback" class="prose prose-invert max-w-none"></div>
-          </div>
-
-          <!-- Ideas -->
-          <div class="bg-neutral-800 rounded-xl p-5 border border-neutral-700">
-            <h2 class="text-white text-xl font-semibold mb-3">
-              Project Ideas
-            </h2>
-            <div id="ideas" class="prose prose-invert max-w-none"></div>
-          </div>
-
+        <div class="bg-neutral-800 rounded-xl p-5 border border-neutral-700">
+          <div id="feedback" class="space-y-5 text-sm text-neutral-300"></div>
+          <div id="ideas" class="space-y-5 text-sm text-neutral-300"></div>
         </div>
       `;
 
-      const feedbackHtml = DOMPurify.sanitize(marked.parse(feedback));
-      const ideasHtml = DOMPurify.sanitize(marked.parse(ideas));
-
-      document.getElementById("feedback").innerHTML = feedbackHtml;
-      document.getElementById("ideas").innerHTML = ideasHtml;
-
+      const feedbackContainer = document.getElementById("feedback");
+      feedbackContainer.innerHTML = `
+        <div class="border border-neutral-700 rounded-lg p-4">
+          <h3 class="text-white text-3xl font-semibold mb-2">
+            Feedback
+          </h3>
+          <p>
+            ${feedback}
+          </p>
+        </div>
+        `;
+      const ideasContainer = document.getElementById("ideas");
+      ideasContainer.innerHTML = projects.map(project => `
+        <div class="border border-neutral-700 rounded-lg p-4">
+          <h3 class="text-white text-3xl font-semibold mb-2">
+            ${project.title}
+          </h3>
+          <p class="mb-3">
+            ${project.description}
+          </p>
+          <div class="mb-2">
+            <span class="text-white font-semibold">Funcionalidades:</span>
+            <ul class="list-disc pl-5">
+              ${project.features.map(f => `<li>${f}</li>`).join("")}
+            </ul>
+          </div>
+          <div class="mb-2">
+            <span class="text-white font-semibold">Stack:</span>
+            <ul class="list-disc pl-5">
+              ${project.stack.map(s => `<li>${s}</li>`).join("")}
+            </ul>
+          </div>
+          <div>
+            <span class="text-white font-semibold">Diferencial:</span>
+            <p>${project.differential}</p>
+          </div>
+        </div>
+      `).join("");
     } catch (err) {
       output.innerHTML = `
         <div class="text-red-400 text-center">
