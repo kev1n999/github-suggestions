@@ -1,2 +1,2 @@
-# Project Sugestions based on your github profile
+# Project Suggestions based on your github profile
 ---

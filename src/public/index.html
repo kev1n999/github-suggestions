@@ -3,10 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Sugestions</title>
+    <title>GitHub Suggestions</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="index.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
 </head>
-<body>
-    <h1>Hello World!</h1>
+<body class="bg-neutral-900 flex justify-center items-start min-h-screen p-6">
+  <div class="flex flex-col items-center bg-neutral-700 w-full max-w-3xl min-h-[70vh] rounded-2xl shadow-lg p-6 gap-6">
+    <h1 class="text-white text-3xl font-semibold text-center">
+      GitHub Suggestions
+    </h1>
+
+    <div class="flex flex-col gap-2 w-full max-w-sm">
+      <label class="text-neutral-200 text-sm">Type your github username</label>
+      <input
+        id="git-username"
+        type="text"
+        placeholder="Username"
+        class="bg-neutral-800 text-white px-4 py-2 rounded-xl outline-none border border-neutral-600 focus:border-blue-500 transition"
+      />
+      <button
+        id="start-btn"
+        class="rounded-xl text-white bg-blue-600 px-4 py-3 cursor-pointer transition hover:bg-blue-700 active:scale-[0.98]"
+      >
+        Get Suggestions
+      </button>
+    </div>
+
+    <div
+      id="output"
+      class="w-full bg-neutral-800 text-white p-5 rounded-xl border border-neutral-700 overflow-hidden"
+    >
+      <div class="text-neutral-400 text-sm text-center">
+        Your results will appear here...
+      </div>
+    </div>
+  </div>
 </body>
 </html>
