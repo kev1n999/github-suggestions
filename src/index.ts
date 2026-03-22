@@ -1,4 +1,4 @@
-import { env } from "./config/env";
+import "dotenv/config";
 import express from "express";
 import { router } from "./routes";
 
