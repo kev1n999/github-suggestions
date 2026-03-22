@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const { feedback, projects } = response;
 
       output.innerHTML = `
-        <div class="bg-neutral-800 rounded-xl p-5 border border-neutral-700">
+        <div class="bg-neutral-800 rounded-xl p-5 flex flex-col gap-3">
           <div id="feedback" class="space-y-5 text-sm text-neutral-300"></div>
           <div id="ideas" class="space-y-5 text-sm text-neutral-300"></div>
         </div>
